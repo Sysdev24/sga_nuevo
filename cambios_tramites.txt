@@ -1,0 +1,42 @@
+instalar composer
+instarlar laravel spatites
+ composer require spatie/laravel-permission
+
+agregar en config/app.php Spatie\Permission\PermissionServiceProvider::class,
+
+
+publicar los archivos
+
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+se copia al archivo migrate y config
+
+php artisan migrate para crear las tablas
+
+
+agregar en el modelo User.php
+
+use Spatie\Permission\Traits\HasRoles;
+
+y en la clase 
+use HasRoles;
+
+con esto incluimos las relaciones con permisos y roles
+
+creamos un seeder para agregar los roles y permisos
+php artisan make:seeder RolSeeder
+
+se crea seeder de usuario
+
+
+se crea crud de usuarios
+
+se crea el crud de roles
+ 
+se crea el crud de permisos
+
+editar el config/adminlte.php
+
+
+
+
