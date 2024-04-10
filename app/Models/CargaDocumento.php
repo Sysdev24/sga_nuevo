@@ -46,10 +46,18 @@ class CargaDocumento extends Model implements Auditable
         return $this->hasOne(AreaTrabajo::class, 'id','area_receptor_id');
     }
 
-    public function status(){
+   /* public function status(){
 
-        return $this->hasOne(EstatusDocumentos::class, 'id', 'status_doc_id');
-    }
+        return $this->hasO    <td></td>
+        <td>{{ mb_strtoupper($v->nro_documento) }}</td>
+        <td>{{ date('d-m-Y', strtotime($v->fecha_documento)) ?? '' }}</td>
+        <td>{{ ($v->tipo_documento) ?? '' }}</td>
+        <td>{{ mb_strtoupper($v->cargado_por, 'utf-8')}}<br> <b>Gerencia: </b> {{ ($v->dirge_carga)}} <br> <b>Division:</b> {{ ($v->area_carga) ?? ''}} </td>
+        <td>{{ mb_strtoupper($v->receptor, 'utf-8')}}<br> <b>Gerencia: </b>  {{($v->dirge_receptor)}} <br> <b>Division:</b> {{($v->area_receptor) ?? ''}}</td>
+        <td>{{ mb_strtoupper($v->asunto) }}</td>
+        <td>{{ mb_strtoupper($v->observaciones) }}</td>
+        <td width='100'>ne(EstatusDocumentos::class, 'id', 'status_doc_id');
+    }*/
 
     public function emisor(){
 

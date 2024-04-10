@@ -23,8 +23,18 @@
                  alt="{{ Auth::user()->name }}">
         @endif
         <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
-            <b class="text-white">Bienvenid@: {{mb_strtoupper (Auth::user()->name) }}  /  ROL : {{  mb_strtoupper(auth()->user()->roles()->first()->name ?? '') }}</b>
+            <b class="text-white">Bienvenid@: {{mb_strtoupper (Auth::user()->name) }}</b>
         </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+<span class="fa fa-power-off" style="color:red">
+      <b class="text-white">Cerrar sesión</b>
+        <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
+            @if(config('adminlte.logout_method'))
+                {{ method_field(config('adminlte.logout_method')) }}
+            @endif
+            {{ csrf_field() }}
+        </form>
+    </span>
     </a>
 
     {{-- User menu dropdown --}}
@@ -73,12 +83,7 @@
                 <i class="fa fa-fw fa-power-off text-red"></i>
                 {{ __('adminlte::adminlte.log_out') }}
             </a>
-            <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
-                @if(config('adminlte.logout_method'))
-                    {{ method_field(config('adminlte.logout_method')) }}
-                @endif
-                {{ csrf_field() }}
-            </form>
+
         </li>
 
     </ul>

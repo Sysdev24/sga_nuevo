@@ -6,46 +6,25 @@
     <br>
     <center><h3><b><div class="card-header"> REGISTRO DE CARGA DE DOCUMENTOS </div> </b></h3></center>
 
-                <div class="row form-group">
-                    <div class="col-md-4">
+                <div hidden class="row form-group">
+                    <div  class="col-md-4">
                       <label>Cargado por: *(Obligatorio) </label>
-                      {{-- <input type="text" id="usuario_emisor_id" name="usuario_emisor_id" class="form-control" placeholder="{{ Auth::user()->name }}" disabled>  --}}
-                      <select id="usuario_emisor_id" name="usuario_emisor_id" class="form-control select2">
-                        <option value="" selected>Seleccione una Opción</option>
-                            @foreach ($destinatarios as $destinatario)
-                            <option value="{{$destinatario->id}}">{{$destinatario->name}}</option>
-                            @endforeach
-                      </select>
+                       <input type="text" id="usuario_emisor_id" name="usuario_emisor_id" class="form-control" value="{{ $adm}}" placeholder="{{ $adm}}" >
                     </div>
                 <div class="col-md-4">
                     <label>Gerencia *(Obligatorio)</label>
-                    <select id="gergral_emisor_id" name="gergral_emisor_id" class="form-control select2">
-                      <option value="" selected>Seleccione una Opción</option>
-                           @foreach ($gerencias as $gerencia)
-                              <option value="{{$gerencia->id}}">{{$gerencia->descripcion}} </option>
-                          @endforeach
-                  </select>
+                    <input type="text" id="gergral_emisor_id" name="gergral_emisor_id" class="form-control" value="{{ $adm1}}" placeholder="{{ $adm1}}" >
                   </div>
-                   <div class="col-md-4">
-                      <label>División *(Obligatorio)</label>
-                      <select id="area_emisor_id" name="area_emisor_id" class="form-control select2">
-                          <option value="" selected>Seleccione una Opción</option>
-                           {{--  @foreach ($areas as $area)
-                          <option value="{{$area->id}}">{{$area->descripcion}} </option>
-                      @endforeach --}}
-                      </select>
-                    </div>
                </div>
 
  <fieldset>
      <center><h5><b> <div class="card-header">DATOS DEL DOCUMENTO</div></b></h5></center>
  </fieldset>
 
-
 <div class="row form-group">
     <div class="col-md-3">
         <label>N° Documento *(Obligatorio)</label>
-        <input type="text"  placeholder="Ingrese el Nro. del Documento" class="form-control file" name="nro_documento" id="nro_documento" value="{{ old('N°') }}" required />
+        <input type="text"  placeholder=" Ejemplo:  ATIT-SIS-02-2023" class="form-control file" name="nro_documento" id="nro_documento" value="{{ old('N°') }}" required />
     </div>
     <div class="col-md-5">
         <label>Tipo de Documento *(Obligatorio)</label>
@@ -57,47 +36,50 @@
         </select>
     </div>
     <br>
-    <div class="col-md-4">
+    <div class="col-md-3">
     <label>Fecha Registro *(Obligatorio)</label>
     <div class=" input-group">
       <div class="input-group-addon">
       </div>
 
-     <input type="date" min="2022-01-01" class="form-control file" name="fecha_documento" id="fecha_documento" value="{{ old('fecha') }}" required />
+     <input type="date" min="2022-01-01" class="form-control file" name="fecha_documento" id="fecha_documento" max="<?= date("Y-m-d") ?>" value="{{ old('fecha') }}" required />
          </div>
     </div>
 </div>
-
+<br>
+<fieldset>
+    <center><h5><b> <div class="card-header">Destinatario</div></b></h5></center>
+</fieldset>
 
  <div class="row form-group">
-        <div class="col-md-4">
-            <label>Destinario *(Obligatorio)</label>
-            <select id="usuario_receptor_id" name="usuario_receptor_id" class="form-control select2">
-                <option value="" selected>Seleccione una Opción</option>
-                 @foreach ($destinatarios as $destinatario)
-                <option value="{{$destinatario->id}}">{{$destinatario->name}}</option>
-                @endforeach
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label>Gerencia *(Obligatorio)</label>
-            <select id="gergral_receptor_id" name="gergral_receptor_id" class="form-control select2">
-                <option value="" selected>Seleccione una Opción</option>
-                     @foreach ($gerencias2 as $gerencia2)
-                        <option value="{{$gerencia2->id}}">{{$gerencia2->descripcion}} </option>
-                    @endforeach
-            </select>
-          </div>
-          <div class="col-md-4">
-              <label>División *(Obligatorio)</label>
-              <select id="area_receptor_id" name="area_receptor_id" class="form-control select2">
-                <option value="" selected disabled>Seleccione una Opción</option>
-            {{--  @foreach ($areas2 as $area2)
-            <option value="{{$area2->id}}">{{$area2->descripcion}} </option>
-        @endforeach --}}
-              </select>
-            </div>
+
+
+    <div  class="row form-group">
+        <div  class="col-md-4">
+          <label>Usuario: *(Obligatorio) </label>
+           <input type="text" id="usuario" name="usuario" class="form-control" placeholder="B0000000" >
         </div>
+
+    <div class="col-md-4">
+        <label>Para:</label>
+        <input type="text" id="name"  class="form-control" placeholder="Nombre del Empleado" readonly>
+      </div>
+
+      <div class="col-md-4">
+        <label>Gerencia:</label>
+        <input type="text" id="gerencia_r" name="" class="form-control" placeholder="Gerencia" readonly>
+      </div>
+      <div hidden class="col-md-4">
+        <label>ID Usuario:</label>
+        <input type="text" id="cedula" name="usuario_receptor_id" class="form-control" readonly>
+      </div>
+      <div hidden class="col-md-4">
+        <label>Gerencia ID:</label>
+        <input type="text" id="gerencia_id" name="gergral_receptor_id" class="form-control"  readonly>
+      </div>
+   </div>
+
+ </div>
     <div class="form-group">
             <div class="col-md-14">
               <label>Asunto *(Obligatorio)</label>
@@ -114,7 +96,8 @@
         <fieldset>
             <center><h5><b> <div class="card-header">ADJUNTAR DOCUMENTOS </div></b></h5></center>
         </fieldset>
-        <h6><b>* Nota: (Solo se admiten archivos PDF)</b></h6>
+        <h6><b>* Nota: (Solo se admiten archivos PDF) (Adjuntar solo Portada del documento)</b></h6>
+
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="archivo"><b>Agregar Documento:(2MB) </b></label><br>
@@ -158,19 +141,19 @@
 <script>
     $(document).ready(function () {
 
-$('#gergral_emisor_id').on('change',function(){
+$('#gergral_receptor_id').on('change',function(){
     var idGerencia=$(this).val();
 
     $.ajax({
-        url:'/fetch-dependencia',
+        url:'/fetch-gerencia',
         type:'get',
         data:{idGerencia:idGerencia},
         dataType:'json',
 
         success:function(result){
-            $("#area_emisor_id").empty()
+            $("#usuario_receptor_id").empty()
             for (const key in result) {
-                $("#area_emisor_id").append('<option value="' + key + '">' + result[key] + '</option>');
+                $("#usuario_receptor_id").append('<option value="' + key + '">' + result[key] + '</option>');
             }
         }
     })
@@ -341,6 +324,32 @@ $('#gergral_receptor_id').on('change',function(){
             }
           }
         });
+
+        $('#usuario').on('change', function() {
+        var usuario = $(this).val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+            , type: 'GET'
+            , url: "{{ route('get.person') }}"
+            , data: {
+                'usuario': usuario
+            , }
+            , success: function(data) {
+                if (data.estatus === 5) {
+                    $('#name').val(data.name);
+                    $('#gerencia_r').val(data.descripcion);
+                    $('#cedula').val(data.cedula);
+                    $('#gerencia_id').val(data.gerencia_id);
+                } else {
+                    alert('El registro no existe')
+                }
+            }
+        , });
+
+    });
         </script>
 
 @endsection

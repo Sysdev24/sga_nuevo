@@ -5,7 +5,7 @@
 
 @section('content_header')
     <br><center><h1 class="m-0 text-dark"><b>BIENVENID@ {{ Auth::user()->name }} - AL SISTEMA DE GESTIÓN DE CARGA DE ARCHIVOS - ATIT</b></h1></center><br>
-    <h2 class="text-success"><p class="my-0"><center><b>(SIGESCA - ATIT)</b></center></p></h2><br>
+    <h2 class="text-success"><p class="my-0"><center><b>(SGA- ATIT)</b></center></p></h2><br>
     <center><img src="vendor/adminlte/dist/img/logo2.png" width="400" height="1000" class="img-fluid"></center><br>
 @stop
 

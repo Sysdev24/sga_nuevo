@@ -25,7 +25,7 @@ left: 10px;
   </div>
 @endif
 <br>
-<center> <h1 class="m-0 text-dark">Listado de Documentos</h1> </center>
+<center> <h1 class="m-0 text-dark">Listado de Documentos </h1> </center>
 <br>
 
 <div class="row">
@@ -122,6 +122,8 @@ left: 10px;
                    <div class="form-row table-responsive-sm">
                     <table class="table table-sm  table-bordered table-striped" style="font-size: 0.8rem" id="dataTable">
                         <thead align="center" class="bg-success">
+                        <td><b>EDITAR</b></td>
+                        <td><b>ESTATUS DE DOCUMENTO</b></td>
                         <td><b>N° Documento</b></td>
                         <td><b>Fecha</b></td>
 			            <td><b>Tipo de Documento</b></td>
@@ -129,8 +131,7 @@ left: 10px;
 			            <td width='300'><b>Destinatario</b></td>
 			            <td><b>Asunto</b></td>
 			            <td><b>Observaciones</b></td>
-                        <td><b>Opciones</b></td>
-                        <td><b>Estatus de Documento</b></td>
+
                         </thead>
                     @foreach($documentos as $k =>$v )
                     <tr align="center">

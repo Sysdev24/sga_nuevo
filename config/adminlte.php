@@ -16,7 +16,7 @@ return [
 
     'title' => '',
     'title_prefix' => '',
-    'title_postfix' => '| SIGESCA',
+    'title_postfix' => '| SGA',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => 'SIGESCA - <b>ATIT</b>',
+    'logo' => 'SGA - <b>ATIT</b>',
     'logo_img' => 'vendor/adminlte/dist/img/logo.jpg',
     'logo_img_class' => 'brand-image-xl img-circle ',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xl img-circle',
-    'logo_img_alt' => 'SIGESCA - <b>ATIT</b>',
+    'logo_img_alt' => 'SGA - <b>ATIT</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,9 +65,9 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => true,
+    'usermenu_header' => false,
     'usermenu_header_class' => 'bg-teal',
-    'usermenu_image' => true,
+    'usermenu_image' => false,
     'usermenu_desc' => true,
     'usermenu_profile_url' => true,
     'usermenu_desc' => false,
@@ -269,13 +269,13 @@ return [
                     //'can'  => 'usuarios.reportes_documentos',
                 ],*/
 
-                [
-                    'text' => 'Reporte Auditoria de Documentos',
+                /*[
+                    'text' => 'Auditoria',
                     'url'  => '/reporte_auditoria',
                     'icon' => 'fas fa-file-signature',
                     'icon_color' => 'green',
                     'can'  => 'usuarios.reporte_auditoria',
-                ],
+                ],*/
              ],
         ],
 

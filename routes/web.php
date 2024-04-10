@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/carga_documento', [App\Http\Controllers\DocumentoController::class, 'index'])->middleware('can:carga_documento.index')->name('carga_documento.index');
 Route::get('/carga_documento/formulario', [App\Http\Controllers\DocumentoController::class, 'create'])->middleware('can:carga_documento.create')->name('carga_documento.create');
 Route::post('/carga_documento', [App\Http\Controllers\DocumentoController::class, 'store'])->name('carga_documento.store');
-Route::get('/fetch-dependencia', [DocumentoController::class, 'fetchDependencia']);
+Route::get('/fetch-gerencia', [DocumentoController::class, 'fetchGerencia']);
 Route::get('/fetch-dependencia2', [DocumentoController::class, 'fetchDependencia2']);
 Route::get('/carga_documento/{id}/edit', [App\Http\Controllers\DocumentoController::class, 'edit'])->middleware('can:carga_documento.edit')->name('carga_documento.edit');
 Route::patch('/carga_documento/{id}', [App\Http\Controllers\DocumentoController::class, 'update'])->middleware('can:carga_documento.edit')->name('carga_documento.update');
@@ -141,5 +141,7 @@ Route::get('/tramite_extranjero/delete/{id}', [TramiteExtranjeroController::clas
 
   //  Route::resource('/user', 'UserController', ['except'=>[
     //'create','store']])->names('user');
+
+Route::get('/getPerson', 'App\Http\Controllers\DocumentoController@getPerson')->name('get.person');
 });
 

@@ -34,8 +34,10 @@ class DocumentoController extends Controller
 	    //$adm = Auth::user()->cedula;
 
        $documentos = RangoFecha::orderBy('created_at','DESC')->get(); //->paginate(7);
+       $tipo_documento = TipoDocumento::orderBy('descripcion', 'ASC')->get();
+       $gerencias = GerenciaGeneral::orderBy('descripcion', 'ASC')->get();
        //$documentos = CargaDocumento::orderBy('fecha_documento','asc')->paginate(7);
-	   return view('carga_documento.index', compact('documentos'));
+	   return view('carga_documento.index', compact('documentos','tipo_documento','gerencias'));
 	   //->with(['documentos' => $nueva]);
 
 
@@ -118,6 +120,8 @@ class DocumentoController extends Controller
 
 	public function create()
     {
+        $adm = Auth::user()->cedula;
+        $adm1 = Auth::user()->gerencia_id;
 		$tipo_documentos = TipoDocumento::orderBy('descripcion', 'ASC')->get();
 		$destinatarios = User::orderBy('name', 'ASC')->get();
 		//$status_documentos = Status::orderBy('descripcion', 'ASC')->get();
@@ -131,7 +135,8 @@ class DocumentoController extends Controller
 		->with('tipo_documentos',$tipo_documentos)
 		->with('destinatarios',$destinatarios)
         ->with('gerencias2',$gerencias2)
-		//->with('status_documentos',$status_documentos)
+		->with('adm',$adm)
+        ->with('adm1',$adm1)
         ->with('areas2',$areas2)
         ->with('areas',$areas)
 		->with('gerencias',$gerencias);
@@ -149,13 +154,13 @@ class DocumentoController extends Controller
             'fecha_documento' 		=> $request['fecha_documento'],
             'usuario_emisor_id' 	=> $request['usuario_emisor_id'],
 			'gergral_emisor_id' 	=> $request['gergral_emisor_id'],
-        	'area_emisor_id' 		=> $request['area_emisor_id'],
+        	//'area_emisor_id' 		=> $request['area_emisor_id'],
         	'tipo_documento_id'		=> $request['tipo_documento_id'],
         	'observaciones' 		=> $request['observaciones'],
         	//'estatus_docu_id' 		=> $request['estatus_docu_id'=='1'],
         	'usuario_receptor_id' 	=> $request['usuario_receptor_id'],
         	'gergral_receptor_id' 	=> $request['gergral_receptor_id'],
-        	'area_receptor_id' 		=> $request['area_receptor_id'],
+        	//'area_receptor_id' 		=> $request['area_receptor_id'],
         	'asunto' 				=> $request['asunto'],
 
             ]);
@@ -164,10 +169,7 @@ class DocumentoController extends Controller
 			$cedula = Thesis::create([
                 //Ojo aqui es en donde asignas la ruta del file a donde ira el documento en este caso es en la carpeta public/ pero puedes definir la carpeta que quieras
                 'tramite_id' => $documentos->id,
-                //'thesis_code' => $request -> file('archivo', 'archivo2', 'archivo3') -> store('public/')
                 'thesis_code' => $request -> file('archivo')-> store(''),
-                //'thesis_code' => $request -> file('archivo2'),
-                //'thesis_code' => $request -> file('archivo3')
                 ]);
 
                 if($request -> file('archivo2')!=null){
@@ -199,10 +201,10 @@ class DocumentoController extends Controller
 }
 
 
-	public function fetchDependencia(Request $request){
+	public function fetchGerencia(Request $request){
 
-		$areas= AreaTrabajo::where("gergral_id",$request->idGerencia)->get();
-		return $areas=$areas->pluck('descripcion','id');
+		$usuarios= User::where("gerencia_id",$request->idGerencia)->get();
+		return $usuarios=$usuarios->pluck('name');
 	}
 
 	public function fetchDependencia2(Request $request){
@@ -352,5 +354,15 @@ class DocumentoController extends Controller
 		return redirect('/carga_documento')->with('mensaje',' Eliminado con exito');
 
 	}
+
+    public function getPerson(Request $request){
+        //dd($request->all());
+        $personal = User:://select('users.id','users.name','users.gerencia_id', 'gergral.descripcion')
+        where('usuario', $request->usuario)
+                        ->leftjoin('gergral', 'gergral.id', '=', 'users.gerencia_id')
+                        ->first();
+        //dd($personal);
+        return response()->json($personal);
+    }
 
 }

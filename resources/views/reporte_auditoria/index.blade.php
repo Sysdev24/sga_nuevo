@@ -4,7 +4,7 @@
 
 @section('content_header')
 <br>
-    <center><b> <h1 class="m-0 text-dark">Reportes Auditoria Documentos</h1> </b></center>
+    <center><b> <h1 class="m-0 text-dark">Auditoria Documentos</h1> </b></center>
 @stop
 
 @section('content')
