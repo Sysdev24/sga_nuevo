@@ -53,6 +53,17 @@
                   </select>
             </div>
           </div>
+          <br>
+          <div class="row">
+            <div class="col-6">
+                <select class="form-control" id="gerencia_id" name="gerencia_id" required>
+                    <option value="" selected>Seleccione una Gerencia</option>
+                     @foreach ($gerencias as $gerencia)
+                        <option value="{{$gerencia->id}}">{{$gerencia->descripcion}} </option>
+                    @endforeach
+                </select>
+            </div>
+          </div>
           <br><hr>
   <!-- /.card-body -->
     <div class="card-footer">

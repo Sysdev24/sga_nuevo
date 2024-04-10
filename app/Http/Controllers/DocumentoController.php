@@ -31,28 +31,27 @@ class DocumentoController extends Controller
 {
 	public function index(){
 
-	    //$adm = Auth::user()->cedula;
-
        $documentos = RangoFecha::orderBy('created_at','DESC')->get(); //->paginate(7);
        $tipo_documento = TipoDocumento::orderBy('descripcion', 'ASC')->get();
        $gerencias = GerenciaGeneral::orderBy('descripcion', 'ASC')->get();
-       //$documentos = CargaDocumento::orderBy('fecha_documento','asc')->paginate(7);
+
+       //dd($tipo_documento);
+
 	   return view('carga_documento.index', compact('documentos','tipo_documento','gerencias'));
-	   //->with(['documentos' => $nueva]);
-
-
 
 	}
 
     public function busquedas(Request $request)
     {
+        $tipo_documento = TipoDocumento::orderBy('descripcion', 'ASC')->get();
+        $gerencias = GerenciaGeneral::orderBy('descripcion', 'ASC')->get();
 
-        $tipos_documentos    = $request->get('buscar_tipos_documentos');
-        $gerencias           = $request->get('buscar_gerencias');
+        $tipo_documento2      = $request->get('buscar_tipos_documentos');
+        $gerencias2           = $request->get('buscar_gerencias');
         //dd($busquedas);
 
-        $nueva = RangoFecha::tiposdocumentos($tipos_documentos)
-        ->gerencias($gerencias)
+        $nueva = RangoFecha::tiposdocumentos($tipo_documento2)
+        ->gerencias($gerencias2)
         ->paginate(7)
         ->withQueryString();
 
@@ -60,43 +59,12 @@ class DocumentoController extends Controller
             return redirect('/carga_documento')->with('error','Su busqueda no tiene coincidencia');
         }else{
          return view('carga_documento.index')
+         ->with(['tipo_documento' => $tipo_documento])
+         ->with(['gerencias' => $gerencias])
          ->with(['documentos' => $nueva]);
         }
 
     }
-
-
-    /*public function busquedas(Request $request)
-    {
-
-        $busquedas = $request->busquedas;
-        //dd($busquedas);
-        $nueva = RangoFecha::where('tipo_documento', 'LIKE','%'.$busquedas.'%')
-        ->orderBy('tipo_documento', 'ASC')
-        ->paginate(7)
-        ->withQueryString();
-        //dd($nueva);
-
-        return view('carga_documento.index', $nueva)
-                ->with(['documentos' => $nueva]);
-    }*/
-
-   /* public function busquedas_gerencia(Request $request)
-    {
-
-        $busquedas = $request->busquedas;
-        //dd($busquedas);
-        $nueva = RangoFecha::where('dirge_receptor', 'LIKE','%'.$busquedas.'%')
-        ->orWhere('dirge_carga','LIKE','%'.$busquedas.'%')
-        ->orderBy('dirge_receptor', 'ASC')
-        ->paginate(7)
-        ->withQueryString();
-        //dd($nueva);
-
-
-        return view('carga_documento.index', $nueva)
-                ->with(['documentos' => $nueva]);
-    }*/
 
     public function fecha_documentos(Request $request) {
 
@@ -127,8 +95,8 @@ class DocumentoController extends Controller
 		//$status_documentos = Status::orderBy('descripcion', 'ASC')->get();
 		$gerencias = GerenciaGeneral::orderBy('descripcion', 'ASC')->get();
 		$gerencias2 = GerenciaGeneral::orderBy('descripcion', 'ASC')->get();
-		$areas = AreaTrabajo::orderBy('descripcion', 'ASC')->get();
-		$areas2 = AreaTrabajo::orderBy('descripcion', 'ASC')->get();
+		//$areas = AreaTrabajo::orderBy('descripcion', 'ASC')->get();
+		//$areas2 = AreaTrabajo::orderBy('descripcion', 'ASC')->get();
 
 
 		return view('carga_documento.create')
@@ -137,8 +105,8 @@ class DocumentoController extends Controller
         ->with('gerencias2',$gerencias2)
 		->with('adm',$adm)
         ->with('adm1',$adm1)
-        ->with('areas2',$areas2)
-        ->with('areas',$areas)
+       //->with('areas2',$areas2)
+        //->with('areas',$areas)
 		->with('gerencias',$gerencias);
 
 

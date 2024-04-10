@@ -25,7 +25,8 @@ class User extends Authenticatable
         'password',
         'usuario',
         'cedula',
-        'estatus'
+        'estatus',
+        'gerencia_id',
     ];
 
     protected $table   = 'users';

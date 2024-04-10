@@ -10,18 +10,18 @@ class RangoFecha extends Model
 {
     use HasFactory;
 
-    protected $table = 'rango_fechas';
+    protected $table = 'listado_documentos';
 
-    public function scopeTiposdocumentos($query, $tipos_documentos) {
-    	if ($tipos_documentos) {
-    		return $query->where('tipo_documento','like',"%".Str::upper($tipos_documentos)."%");
+    public function scopeTiposdocumentos($query, $tipo_documento) {
+    	if ($tipo_documento) {
+    		return $query->where('tipo_documento_id','like', $tipo_documento);
     	}
     }
 
     public function scopeGerencias($query, $gerencias) {
     	if ($gerencias) {
-    		return $query->where('dirge_carga','like',"%".Str::upper($gerencias)."%")
-            ->orWhere('dirge_receptor','like',"%".Str::upper($gerencias)."%");
+    		return $query->where('gergral_emisor_id','like', $gerencias)
+            ->orWhere('gergral_receptor_id','like',$gerencias);
         }
     }
 }

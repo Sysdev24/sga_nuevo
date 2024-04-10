@@ -56,38 +56,39 @@ left: 10px;
                             <div class="col-auto">
                                 <label for="Tipo_documentos" class="col-form-label">Tipo documento: </label>
                             </div>
-
-                            <select id="tipo_documento_id"  name="tipo_documento_id" class="form-control select2">
+                            <div class="row">
+                                <div class="col">
+                            <select id="tipo_documento_id"  name="buscar_tipos_documentos" class="form-control select2">
                                 <option value="" selected>Seleccione una Opción</option>
                                  @foreach ($tipo_documento as $d)
                                     <option value="{{$d->id}}">{{$d->descripcion}}</option>
                                 @endforeach
                             </select>
+                                </div>
                                 <div class="col-auto">
                                     <label for="Gerencias" class="col-form-label">Gerencias: </label>
                                 </div>
+                                <div class="col">
                                 <select id="gerencias"  name="buscar_gerencias" class="form-control select2">
                                     <option value="" selected>Seleccione una Opción</option>
                                      @foreach ($gerencias  as $g)
                                         <option value="{{$g->id}}">{{$g->descripcion}}</option>
                                     @endforeach
                                 </select>
+                                </div>
+                               
+                            </div>
 
-                              <!--  <div class="col-auto">
-                                    <input name="buscar_gerencias" class="form-control mr-sm-2" type="search" placeholder="Buscar por Gerencias" aria-label="Search">
-                                </div>-->
-
-
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-outline-success my-4 my-sm-0 float-right" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;
-                                    Buscar</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            </form>
                 </nav>
             </div>
         </div>
     </div>
+
         <div class="card-footer float-center">
+            <button class="btn btn-outline-success my-4 my-sm-0 btn-sm" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;
+                Buscar</button>
+
+        </form>
             <a href="{{ route('carga_documento.index') }}">
                 <button class="btn btn-outline-danger btn-sm" type="button" title="Recargar">
                     <span class="fas fa-sync-alt"></span> Refrescar
@@ -187,27 +188,6 @@ left: 10px;
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-
-{{--  <script>
-    $(document).ready(function(){
-    $('.input-daterange').datepicker({
-        format: 'dd-mm-yyyy',
-        language: 'es',
-        autoclose: true,
-        calendarWeeks : true,
-        clearBtn: true,
-        disableTouchKeyboard: true,
-       /* startDate: "23-08-2022",
-        opens: 'center',
-        firstDay:"1",*/
-        },
-        function(start, end, label) {
-            var years = moment().diff(start, 'years');
-        /*console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));*/
-        });
-
-    });
-        </script> --}}
 
 <script>
     $(document).ready(function() {

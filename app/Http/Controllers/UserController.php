@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GerenciaGeneral;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -29,8 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-	$roles = Role::all()->pluck('name');
-        return view('usuarios.create',compact('roles'));
+    $gerencias  = GerenciaGeneral::orderBy('id', 'desc')->get();
+	$roles      = Role::all()->pluck('name');
+
+    return view('usuarios.create',compact('roles', 'gerencias'));
     }
 
     /**
@@ -42,12 +45,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
     $validated = $request->validate([
-           'name'       => 'required|max:50',
-	       'email'      => 'required|unique:users,email|email',
-	       'role'       => 'required',
-           'estatus'    => 'required',
-	       'cedula'     => 'required|max:8|min:5',
-           'usuario'    => 'required|min:5|max:15',
+           'name'           => 'required|max:50',
+	       'email'          => 'required|unique:users,email|email',
+	       'role'           => 'required',
+           'estatus'        => 'required',
+	       'cedula'         => 'required|max:8|min:5',
+           'usuario'        => 'required|min:5|max:15',
             ],[
             'name.required'     => 'El campo nombre es requerido ',
             'name.max'          => 'El campo nombre debe tener un máximo de 50 carácteres',
@@ -61,11 +64,12 @@ class UserController extends Controller
             ]);
         //dd($request->all());
         $data = array(
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'usuario'   => $request->usuario,
-	        'cedula'    => $request->cedula,
-            'estatus'   => $request->estatus,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'usuario'       => $request->usuario,
+	        'cedula'        => $request->cedula,
+            'estatus'       => $request->estatus,
+            'gerencia_id'   => $request->gerencia_id,
 
         );
         //dd($request->all());
