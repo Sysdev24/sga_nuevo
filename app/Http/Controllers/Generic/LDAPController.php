@@ -41,7 +41,7 @@ class LDAPController extends Controller
             //$uid = "B2500094"; //esto es lo que me pasaron nuevo
             $servidor_ldap = $server_LDAP; //El servidor controlador de dominio
             $dominio_NB = $domain; //Nombre del dominio
-            $connect = ldap_connect($servidor_ldap, 389); //Conexion al Servidor
+            $connect = ldap_connect($servidor_ldap/* , 389 */); //Conexion al Servidor
 
             if ($connect) //Si todo ok, continua
             {

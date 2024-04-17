@@ -55,6 +55,7 @@ class LoginController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
+    //public function credentials(Request $request)
     {
         $this->validateLogin($request);
 
@@ -64,24 +65,27 @@ class LoginController extends Controller
         );
 
         //dd($request->all());
-        $usuario=User::where('usuario',strtoupper($credentials['usuario']))->first();
+        $usuario=User::where('usuario',strtoupper($credentials['usuario']))
+        //->where('password', $credentials['password'])
+        ->first();
 
-
+        //dd($request->all());
         if($usuario){
             //-return  $usuario;
             //dd($usuario);
             if (strtoupper($request->get('usuario')) != 'ADMIN') {  // <--Aqui valida el usuario Si el Usuario es distinto a ADMIN se tiene que validar contra el LDAP
                 //Auth LDAP
+                echo "1";
                 //dd($request->all(), 'hola');
                 $usuario_valido = $this->validarUsuarioInterno($credentials, $request);
-                echo "1";
+
                 //dd($usuario_valido,  $request->all()); //$credentials,;
                 if ($usuario_valido === true) {
                     echo "2";
 
                     $validar_user_LDAP = LDAPController::validarUsuarioLDAP($request->get('usuario'), $request->get('password'));
-                    echo "3";
-                    //dd($validar_user_LDAP);
+                   // echo "3".$validar_user_LDAP;
+                   dd($validar_user_LDAP);
                     if ($validar_user_LDAP == "ERROR_USER") {
 
                         return back()->withErrors(array('usuario' => 'Usuario LDAP inválido'))->withInput(request(['usuario']));
@@ -90,11 +94,11 @@ class LoginController extends Controller
 
                         return back()->withErrors(array('password' => 'Clave LDAP inválida'))->withInput(request(['usuario']));
 
-                    /*} elseif ($validar_user_LDAP == "ERROR_LDAP") {
+                    } elseif ($validar_user_LDAP == "ERROR_LDAP") {
                         echo "Aqui esta";
                         //dd($validar_user_LDAP, $request->all(), 'Aqui esta');
                         return back()->withErrors(array('ldap' => 'Error al validar el usuario en el servidor LDAP'))->withInput(request(['usuario']));
-                    */
+
                     } else {
                         if ($this->validate_User_By_Id($usuario->id)) {
 
